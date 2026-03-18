@@ -1,5 +1,5 @@
 // public/app.js
-const socket = io();
+const socket = io("https://rellcord.onrender.com");
 
 // State
 let localStream;
