@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Comms MVP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        /* Custom scrollbar for chat */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-gray-950 text-gray-100 h-screen flex overflow-hidden font-sans">
 
+    <aside class="w-64 bg-gray-900 border-r border-gray-800 flex flex-col">
+        <div class="p-4 border-b border-gray-800 shadow-sm">
+            <h1 class="text-xl font-semibold tracking-wide text-gray-50">Comms MVP</h1>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4">
+            <h2 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Voice Channel</h2>
+            <ul id="user-list" class="space-y-2">
+                </ul>
+        </div>
+        
+        <div class="p-4 bg-gray-900 border-t border-gray-800 flex justify-between items-center">
+            <div class="flex space-x-2">
+                <button id="btn-mute" class="p-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors" title="Mute">
+                    🎤
+                </button>
+                <button id="btn-deafen" class="p-2 bg-gray-800 hover:bg-gray-700 rounded-md transition-colors" title="Deafen">
+                    🎧
+                </button>
+            </div>
+            <button id="btn-screen" class="p-2 bg-blue-600 hover:bg-blue-500 rounded-md transition-colors text-sm font-medium">
+                🖥️ Share
+            </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-gray-950 relative">
+        
+        <div id="screen-container" class="hidden w-full h-1/2 bg-black border-b border-gray-800 p-2">
+            <video id="screen-video" autoplay playsinline class="w-full h-full object-contain"></video>
+        </div>
+
+        <div class="flex-1 flex flex-col">
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-4">
+                </div>
+            
+            <div class="p-4 bg-gray-950 border-t border-gray-800">
+                <form id="chat-form" class="flex items-center bg-gray-800 rounded-lg border border-gray-700 focus-within:border-gray-500 overflow-hidden px-2">
+                    <input type="text" id="chat-input" autocomplete="off" placeholder="Message the room..." 
+                           class="flex-1 bg-transparent p-3 text-sm focus:outline-none text-gray-200 placeholder-gray-500">
+                    <button type="submit" class="px-4 py-2 text-blue-400 font-medium hover:text-blue-300">Send</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <div id="audio-container" class="hidden"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
